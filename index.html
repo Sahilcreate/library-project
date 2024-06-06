@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahil's Library</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js" defer></script>
+</head>
+<body>
+    <div class="bodyContainer">
+        
+        <header class="header">
+            <h1 class="logo"><span>librar</span>y.</h1>
+            <nav>
+                <button>Log In</button>
+            </nav>
+        </header>
+
+        <main class="main">
+            <div class="showDialogBtnContainer">
+                <button id="showDialogBtn">+ Add Book</button>
+            </div>
+            <div class="libraryContainer"></div>
+        </main>
+
+        <footer class="footer">
+            <p>Created by <a href="https://github.com/Sahilcreate/library-project">Sahil</a> for <a href="https://www.theodinproject.com/lessons/node-path-javascript-library#project-solution">The Odin Project</a></p>
+        </footer>
+        
+    </div>
+
+    <dialog id="dialog">
+        <form method="dialog" id="bookForm">
+            <p>
+                <label for="titleInput">Title</label>
+                <input type="text" name="title" id="titleInput" required>
+            </p>
+            <p>
+                <label for="authorInput">Author</label>
+                <input type="text" name="author" id="authorInput" required>
+            </p>
+            <p>
+                <label for="pagesInput">Pages</label>
+                <input type="number" name="pages" id="pagesInput" required>
+            </p>
+            <p>
+                <label for="statusInput">Status</label>
+                <select name="status" id="statusInput">
+                    <option value="Read">Read</option>
+                    <option value="Not Read">Not Read</option>
+                </select>
+            </p>
+            <p>
+                <button type="submit" id="addBookDataBtn">Submit</button>
+            </p>
+        </form>
+    </dialog>
+</body>
+</html>

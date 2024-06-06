@@ -1,0 +1,357 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol,
+ul {
+    list-style: none;
+}
+blockquote,
+q {
+    quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: "";
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+/*
+~~~~~~~~~~~~~~
+    MY CODE
+~~~~~~~~~~~~~~
+*/
+
+@font-face {
+    font-family: 'coolvetica';
+    src: url(fonts/coolvetica_rg-webfont.woff2) format('woff2');
+    src: url(fonts/coolvetica_rg-webfont.woff) format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    font-family: 'coolvetica', poppins, sans-serif;
+    font-size: 20px;
+
+    --backgroundColor: rgb(246 246 246);
+    --focusColor: rgb(225 225 225);
+    --black: rgb(0 0 0);
+    --white: rgb(255 255 255);
+    --green: rgb(0 255 0/0.6);
+    --red: rgb(255 0 0/0.6);
+}
+
+body {
+    background-color: var(--backgroundColor);
+}
+
+input,
+button,
+select {
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font: inherit;
+}
+
+.bodyContainer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/*
+~~~~~~~~~~~
+    HEADER
+~~~~~~~~~~~
+*/
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    padding: 25px 0; 
+    background-color: var(--white);
+}
+
+.logo {
+    font-size: 40px;
+    letter-spacing: 1px;
+
+}
+
+.logo span {
+    text-decoration: underline;
+}
+
+nav button{
+    padding: 12px 30px;
+    background-color: var(--backgroundColor);
+    border-radius: 8px;
+}
+
+
+/*
+~~~~~~~~~
+    MAIN
+~~~~~~~~~
+*/
+
+.main {
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px;
+
+    box-shadow: inset 0px 2px 5px -4px var(--black);
+}
+
+.showDialogBtnContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 30px;
+}
+
+.showDialogBtnContainer button {
+    padding: 12px 30px;
+    border-radius: 8px;
+}
+
+.libraryContainer {
+    padding-top: 20px;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 0.5fr));
+    gap: 20px;
+}
+
+/*
+    CARD
+*/
+
+.card {
+    background-color: var(--white);
+    border: none;
+    border-radius: 8px;
+    width: auto;
+    height: 300px;
+    padding: 0 20px 20px;
+
+
+    box-shadow: 2px 2px 5px -4px var(--black), -1px -1px 5px -4px var(--black);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.card-title {
+    font-size: 25px;
+    text-align: center;
+    line-height: 1.2;
+    padding: 10px 0;
+    border-bottom: 3px solid var(--focusColor);
+}
+
+.btn-group {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.card-status {
+    padding: 12px 30px;
+    background-color: var(--green);
+    border-radius: 8px;
+}
+
+.card-remove {
+    padding: 12px 30px;
+    background-color: var(--backgroundColor);
+    border-radius: 8px;
+}
+
+.not-read {
+    background-color: var(--red);
+}
+
+
+/*
+~~~~~~~~~~~
+    DIALOG
+~~~~~~~~~~~
+*/
+
+dialog {
+    padding: 0;
+    border: none;
+    border-radius: 12px;
+    background-color: var(--backgroundColor);
+}
+
+dialog::backdrop {
+    backdrop-filter: blur(4px);
+}
+
+dialog p:first-of-type {
+    padding-top: 20px;
+}
+
+dialog p {
+    padding: 0px 20px 20px 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+dialog label,
+dialog button {
+    font-size: 22px;
+}
+
+input,
+select {
+    border: 1px solid var(--focusColor);
+    background-color: var(--white);
+    border-radius: 4px;
+    padding: 3px 10px;
+}
+
+select {
+    text-align: center;
+}
+
+dialog p:last-of-type{
+    justify-content: center;
+}
+
+#addBookDataBtn {
+    border: none;
+    border-radius: 8px;
+    background-color: var(--green);
+    padding: 12px 30px;
+}
+
+
+/*
+~~~~~~~~~~~
+    FOOTER
+~~~~~~~~~~~
+*/
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+    background-color: var(--backgroundColor);
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/*
+~~~~~~~~~~~~~~~~~~~~~
+    USER INTERACTION
+~~~~~~~~~~~~~~~~~~~~~
+*/
+
+.showDialogBtnContainer button:hover,
+.showDialogBtnContainer button:focus,
+nav button:hover,
+nav button:focus,
+.card-remove:hover,
+.card-remove:focus {
+    cursor: pointer;
+    background-color: var(--focusColor);
+    transition: 0.3s;
+}
+
+.card-status,
+#addBookDataBtn {
+    cursor: pointer;
+}
+
+.read:hover,
+.read:focus,
+#addBookDataBtn:hover,
+#addBookDataBtn:focus {
+    background-color: rgb(0 255 0/0.3);
+    transition: 0.3s;
+}
+
+.not-read:hover,
+.not-read:focus {
+    background-color: rgb(255 0 0/0.3);
+    transition: 0.3s;
+}
+
+input:hover,
+input:focus,
+select:hover,
+select:focus {
+    border-color: var(--black);
+}
+
+a:visited {
+    color: var(--black);
+}
+
+a:hover {
+    font-size: 21px;
+    text-decoration: underline;
+    transition: 0.3s;
+}
+
+
