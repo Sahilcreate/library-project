@@ -1,50 +1,117 @@
 
-const addBookDataBtn = document.getElementById('addBookDataBtn');
-const libraryContainer = document.querySelector('.libraryContainer');
+(function () {
 const myLibrary = [];
-const bookForm = document.getElementById('bookForm');
-const showDialogBtn = document.getElementById('showDialogBtn');
-const dialog = document.getElementById('dialog');
 
-function Book(title, author, pages, status) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.status = status;
+function domCache () {
+    const addBookDataBtn = document.getElementById('addBookDataBtn');
+    const libraryContainer = document.querySelector('.libraryContainer');
+    
+    const bookForm = document.getElementById('bookForm');
+    const showDialogBtn = document.getElementById('showDialogBtn');
+    const dialog = document.getElementById('dialog');
+
+    const titleInput = document.getElementById('titleInput');
+    const authorInput = document.getElementById('authorInput');
+    const pagesInput = document.getElementById('pagesInput');
+    const statusInput = document.getElementById('statusInput');
+
+    return {
+        addBookDataBtn,
+        libraryContainer,
+        bookForm,
+        showDialogBtn,
+        dialog,
+        titleInput,
+        authorInput,
+        pagesInput,
+        statusInput
+    }
 }
 
-showDialogBtn.addEventListener('click', () => {
-    dialog.showModal();
-    
-})
-
-dialog.addEventListener('click', (event) => {
-    if (event.target.id === 'dialog') {
-        dialog.close();
+class Book {
+    constructor (title, author, pages, status) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.status = status;
     }
-})
 
-bookForm.addEventListener('submit', (event) => {
-    const title = document.getElementById('titleInput').value;
-    const author = document.getElementById('authorInput').value;
-    const pages = document.getElementById('pagesInput').value;
-    const status = document.getElementById('statusInput').value;
+    addBookToLibrary() {
+        myLibrary.push(this);
+    }
+}
 
-    const newBook = new Book(title, author, pages, status);
-    myLibrary.push(newBook);
+(function eventListeners() {
+    const elements = domCache();
 
-    document.getElementById('bookForm').reset();
+    elements.showDialogBtn.addEventListener('click', () => {
+        elements.dialog.showModal();
+    })
 
-    showBooksInLibrary();
-});
+    elements.dialog.addEventListener('click', (event) => {
+        if(event.target.id === 'dialog') {
+            elements.dialog.close();
+        }
+    })
 
+    elements.bookForm.addEventListener('submit', (event) => {
+        const title = elements.titleInput.value;
+        const author = elements.authorInput.value;
+        const pages = elements.pagesInput.value;
+        const status = elements.statusInput.value;
 
-function showBooksInLibrary() {
+        const newBook = new Book(title, author, pages, status);
+
+        newBook.addBookToLibrary();
+        elements.bookForm.reset();
+
+        showBooksInLibrary(elements);
+    })
+
+    document.body.addEventListener('click', (event) => {
+        const btn = event.target;
+        const index = Number(btn.getAttribute('data-attribute'));
+    
+        if(btn.classList.contains('card-remove')) {
+            myLibrary.splice(index, 1);
+        } else if (btn.classList.contains('card-status')) {
+            if (btn.classList.contains('read')) {
+                btn.classList.remove('read');
+                btn.classList.add('not-read');
+                myLibrary[index].status = "Not Read";
+            } else if (btn.classList.contains('not-read')) {
+                btn.classList.remove('not-read');
+                btn.classList.add('read');
+                myLibrary[index].status = "Read";
+            }
+        }
+        
+        showBooksInLibrary(elements);
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const initialBooks = [
+            new Book("You Don't Know JS Yet: Get Started", "Kyle Simpson", "140", "Read"),
+            new Book("The Subtle Art of Not Giving a F*ck", "Mark Manson", "212", "Not Read"),
+            new Book("The Life-Changing Magic of Tidying Up", "Marie Kondo", "213", "Read"),
+            new Book("How to Win Friends & Influence People", "Dale Carnegie", "304", "Read")
+        ];
+
+        initialBooks.forEach((book) => {
+            book.addBookToLibrary();
+        })
+
+        showBooksInLibrary(elements);
+    })
+
+})();
+
+function showBooksInLibrary(elements) {
     function deleteLibrary() {
-        let child = libraryContainer.lastElementChild;
+        let child = elements.libraryContainer.lastElementChild;
         while(child) {
-            libraryContainer.removeChild(child);
-            child = libraryContainer.lastElementChild;
+            elements.libraryContainer.removeChild(child);
+            child = elements.libraryContainer.lastElementChild;
         }
     }
     deleteLibrary();
@@ -83,37 +150,8 @@ function showBooksInLibrary() {
         card.appendChild(cardPages);
         card.appendChild(btnGroup);
 
-
-        libraryContainer.appendChild(card);
+        elements.libraryContainer.appendChild(card);
     }
-
 }
 
-document.body.addEventListener('click', (event) => {
-    const btn = event.target;
-    const index = Number(btn.getAttribute('data-attribute'));
-
-    if(btn.classList.contains('card-remove')) {
-        myLibrary.splice(index, 1);
-    } else if (btn.classList.contains('card-status')) {
-        if (btn.classList.contains('read')) {
-            btn.classList.remove('read');
-            btn.classList.add('not-read');
-            myLibrary[index].status = "Not Read";
-        } else if (btn.classList.contains('not-read')) {
-            btn.classList.remove('not-read');
-            btn.classList.add('read');
-            myLibrary[index].status = "Read";
-        }
-    }
-    
-    showBooksInLibrary();
-});
-
-const book1 = new Book("You Don't Know JS Yet: Get Started", "Kyle Simpson", "140", "Read");
-const book2 = new Book("The Subtle Art of Not Giving a F*ck", "Mark Manson", "212", "Not Read");
-const book3 = new Book("The Life-Changing Magic of Tidying Up", "Marie Kondo", "213", "Read");
-const book4 = new Book("How to Win Friends & Influence People", "Dale Carnegie", "304", "Read");
-
-myLibrary.push(book1, book2, book3, book4);
-showBooksInLibrary();
+})();
