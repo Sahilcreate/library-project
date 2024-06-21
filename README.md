@@ -22,6 +22,7 @@
 - [ ] Add Different tags to Books and user is able to make a custom tag for book
 - [ ] Add a sidebar of options like Google Keep-notes
 - [ ] Make it Responsive and Accessible
+- [x] Refactor the code to use class and reduce global variables
 
 ## Credits
 - font [Coolvetica](https://www.dafont.com/coolvetica.font) by [Typodermic fonts](https://typodermicfonts.com/)
